@@ -21,6 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             'capture_image = my_package.1_0capture_image:main',
+            'flask = my_package.flask_gazebocam_webcam:main',
+            'yolo = my_package.gazebo_follow_yolo_pub:main',
         ],
     },
 )
