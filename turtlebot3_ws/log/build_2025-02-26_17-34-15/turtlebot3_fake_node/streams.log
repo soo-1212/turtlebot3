@@ -1,0 +1,4 @@
+[0.253s] Invoking command in '/home/soo/turtlebot3_ws/build/turtlebot3_fake_node': AMENT_PREFIX_PATH=/home/soo/turtlebot3_ws/install/turtlebot3_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/soo/turtlebot3_ws/install/turtlebot3_msgs:/opt/ros/humble LD_LIBRARY_PATH=/home/soo/turtlebot3_ws/install/turtlebot3_msgs/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins PYTHONPATH=/home/soo/turtlebot3_ws/install/turtlebot3_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/soo/turtlebot3_ws/build/turtlebot3_fake_node -- -j16 -l16
+[0.291s] [ 50%] [32mBuilding CXX object CMakeFiles/turtlebot3_fake_node.dir/src/turtlebot3_fake_node.cpp.o[0m
+[7.611s] [100%] [32m[1mLinking CXX executable turtlebot3_fake_node[0m
+[7.965s] [100%] Built target turtlebot3_fake_node
