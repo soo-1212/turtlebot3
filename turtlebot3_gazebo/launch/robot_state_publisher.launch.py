@@ -31,6 +31,8 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     urdf_file_name = 'turtlebot3_' + TURTLEBOT3_MODEL + '.urdf'
 
+    print('urdf_file_name : {}'.format(urdf_file_name))
+
     urdf_path = os.path.join(
         get_package_share_directory('turtlebot3_gazebo'),
         'urdf',
@@ -49,8 +51,6 @@ def generate_launch_description():
     with open(urdf_path_car, 'r') as car:
         robot_desc_car = car.read()
     #/추가
-    print('urdf_file_name : {}'.format(urdf_file_name))
-
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -67,7 +67,6 @@ def generate_launch_description():
                 'use_sim_time': use_sim_time,
                 'robot_description': robot_desc
             }],
-            
         ),
         #추가
         Node(

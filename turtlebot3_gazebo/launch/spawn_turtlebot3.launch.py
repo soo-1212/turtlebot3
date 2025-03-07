@@ -31,26 +31,20 @@ def generate_launch_description():
         model_folder,
         'model.sdf'
     )
-    
-
-
 
     # Launch configuration variables specific to simulation
-    x_pose = LaunchConfiguration('x_pose', default='0.0')
-    y_pose = LaunchConfiguration('y_pose', default='0.0')
-    
-    
+    x_pose = LaunchConfiguration('x_pose', default='3.0')
+    y_pose = LaunchConfiguration('y_pose', default='3.0')
+
     # Declare the launch arguments
     declare_x_position_cmd = DeclareLaunchArgument(
-        'x_pose', default_value='0.0',
+        'x_pose', default_value='3.0',
         description='Specify namespace of the robot')
 
     declare_y_position_cmd = DeclareLaunchArgument(
-        'y_pose', default_value='0.0',
+        'y_pose', default_value='3.0',
         description='Specify namespace of the robot')
-    
-    
-    
+
     start_gazebo_ros_spawner_cmd = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
@@ -59,13 +53,20 @@ def generate_launch_description():
             '-file', urdf_path,
             '-x', x_pose,
             '-y', y_pose,
-            '-z', '0.01'
+            '-z', '0.1'
         ],
         output='screen',
     )
-    
+
     ld = LaunchDescription()
     
+    ld.add_action(declare_x_position_cmd)
+    ld.add_action(declare_y_position_cmd)
+
+    # Add any conditioned actions
+    ld.add_action(start_gazebo_ros_spawner_cmd)
+
+
     #추가
     urdf_path_car = os.path.join(
         get_package_share_directory('turtlebot3_gazebo'),
@@ -93,7 +94,7 @@ def generate_launch_description():
             '-file', urdf_path_car,
             '-x', x_pose_car,
             '-y', y_pose_car,
-            '-z', '0.01'
+            '-z', '0.1'
         ],
         output='screen',
     )
@@ -101,15 +102,12 @@ def generate_launch_description():
     ld.add_action(declare_x_position_cmd_car)
     ld.add_action(declare_y_position_cmd_car)
 
+    
     ld.add_action(start_gazebo_ros_spawner_cmd_car)
     #/추가
     
     
     # Declare the launch options
-    ld.add_action(declare_x_position_cmd)
-    ld.add_action(declare_y_position_cmd)
 
-    # Add any conditioned actions
-    ld.add_action(start_gazebo_ros_spawner_cmd)
 
     return ld

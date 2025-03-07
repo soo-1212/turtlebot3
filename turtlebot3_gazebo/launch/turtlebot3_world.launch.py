@@ -20,7 +20,7 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 
@@ -30,14 +30,14 @@ def generate_launch_description():
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
-    x_pose = LaunchConfiguration('x_pose', default='2.4')
+    x_pose = LaunchConfiguration('x_pose', default='2.5')
     y_pose = LaunchConfiguration('y_pose', default='1.2')
-    
+
     #추가
     x_pose_car = LaunchConfiguration('x_pose_car', default='1.4')
     y_pose_car = LaunchConfiguration('y_pose_car', default='0.6')
     #/추가
-
+    
     world = os.path.join(
         get_package_share_directory('turtlebot3_gazebo'),
         'worlds',
@@ -73,17 +73,20 @@ def generate_launch_description():
             'y_pose': y_pose,
             #추가
             'x_pose_car': x_pose_car,
-            'x_pose_car': y_pose_car
+            'y_pose_car': y_pose_car
             #/추가
         }.items()
     )
-
+    spawn_after_delay_cmd = TimerAction(
+            period=1.0,  
+            actions=[spawn_turtlebot_cmd] 
+        )
     ld = LaunchDescription()
 
     # Add the commands to the launch description
     ld.add_action(gzserver_cmd)
     ld.add_action(gzclient_cmd)
     ld.add_action(robot_state_publisher_cmd)
-    ld.add_action(spawn_turtlebot_cmd)
+    ld.add_action(spawn_after_delay_cmd)
 
     return ld
