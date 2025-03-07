@@ -62,6 +62,7 @@ def generate_launch_description():
             package='robot_state_publisher',
             executable='robot_state_publisher',
             name='robot_state_publisher',
+            namespace='turtlebot', 
             output='screen',
             parameters=[{
                 'use_sim_time': use_sim_time,
